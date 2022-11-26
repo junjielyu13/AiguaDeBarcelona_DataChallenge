@@ -1940,6 +1940,7 @@ input[type="checkbox"] {
 .navigation-menu > ul > li.active > a span {
   color: #f2b263;
 }
+
 .submenu {
   position: absolute;
   top: 100%;
@@ -2325,7 +2326,8 @@ input[type="checkbox"] {
   transform: translateX(0%);
 }
 .mobile-menu-overlay__header {
-  background-color: #ffffff;
+  background-color: transparent;
+  background-image: linear-gradient(90deg, #3c5aa1 0%, #00fff9 100%);
   padding: 15px 0;
 }
 .mobile-menu-overlay__header .mobile-navigation-close-icon {
@@ -3559,6 +3561,18 @@ input[type="checkbox"] {
 
 .about-video-box {
   height: 560px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.mapa-box {
+  height: 500px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
