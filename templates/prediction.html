@@ -21,7 +21,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="../static/css/style.min.css" />
-    <script src="../static/js/grafics.js"></script>
+    <script src="../static/js/prediction.js"></script>
   </head>
 
   <body>
@@ -160,7 +160,7 @@
 
       <div class="church-about-area section-space--ptb_120">
         <div class="container">
-          <form>
+          <form action="javascript:" onsubmit="return prediction(this)">
             <div class="row align-items-start">
               <div class="col-lg-4">
                 <div class="about-tai-content">
@@ -174,6 +174,8 @@
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
+                        value="comercial"
+                        checked
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Comercial
@@ -184,9 +186,10 @@
                         class="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        id="flexRadioDefault1"
+                        id="flexRadioDefault2"
+                        value="domestico"
                       />
-                      <label class="form-check-label" for="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault2">
                         Domestico
                       </label>
                     </div>
@@ -195,9 +198,10 @@
                         class="form-check-input"
                         type="radio"
                         name="flexRadioDefault"
-                        id="flexRadioDefault1"
+                        id="flexRadioDefault3"
+                        value="industrial"
                       />
-                      <label class="form-check-label" for="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault3">
                         Industrial
                       </label>
                     </div>
@@ -210,33 +214,43 @@
                   <div class="section-title-wrap">
                     <h3 class="section-title--two left-style mb-30">Zona:</h3>
                   </div>
-                  <select>
-                    <option value="01">BADALONA</option>
-                    <option value="02">BARCELONA</option>
-                    <option value="03">BEGUES</option>
-                    <option value="04">CASTELLDEFELS</option>
-                    <option value="05">CERDANYOLA</option>
-                    <option value="06">CORNELLA</option>
-                    <option value="07">EL PAPIOL</option>
-                    <option value="08">ESPLUGUES</option>
-                    <option value="09">GAVA</option>
-                    <option value="10">L'HOSPITALET LLOBR.</option>
-                    <option value="11">LA LLAGOSTA</option>
-                    <option value="12">LES BOTIGUES SITGES</option>
-                    <option value="13">MONTCADA I REIXAC</option>
-                    <option value="14">MONTGAT</option>
-                    <option value="15">PALLEJA</option>
-                    <option value="16">SANT ADRIA</option>
-                    <option value="17">SANT BOI</option>
-                    <option value="18">SANT CLIMENT LLOB.</option>
-                    <option value="19">SANT CUGAT</option>
-                    <option value="20">SANT FELIU LL.</option>
-                    <option value="21">SANT JOAN DESPI</option>
-                    <option value="22">SANT JUST DESVERN</option>
-                    <option value="23">STA.COLOMA CERVELLO</option>
-                    <option value="24">STA.COLOMA GRAMENET</option>
-                    <option value="25">TORRELLES LLOBREGAT</option>
-                    <option value="26">VILADECANS</option>
+                  <select id="zonaSelector" name="zonaSelector">
+                    <option value="BADALONA">BADALONA</option>
+                    <option value="BARCELONA">BARCELONA</option>
+                    <option value="BEGUES">BEGUES</option>
+                    <option value="CASTELLDEFELS">CASTELLDEFELS</option>
+                    <option value="CERDANYOLA">CERDANYOLA</option>
+                    <option value="CORNELLA">CORNELLA</option>
+                    <option value="EL PAPIOL">EL PAPIOL</option>
+                    <option value="ESPLUGUES">ESPLUGUES</option>
+                    <option value="GAVA">GAVA</option>
+                    <option value="L'HOSPITALET LLOBR">
+                      L'HOSPITALET LLOBR
+                    </option>
+                    <option value="LA LLAGOSTA">LA LLAGOSTA</option>
+                    <option value="LES BOTIGUES SITGES">
+                      LES BOTIGUES SITGES
+                    </option>
+                    <option value="MONTCADA I REIXAC">MONTCADA I REIXAC</option>
+                    <option value="MONTGAT">MONTGAT</option>
+                    <option value="PALLEJA">PALLEJA</option>
+                    <option value="SANT ADRIA">SANT ADRIA</option>
+                    <option value="SANT BOI">SANT BOI</option>
+                    <option value="SANT CLIMENT LLOB">SANT CLIMENT LLOB</option>
+                    <option value="SANT CUGAT">SANT CUGAT</option>
+                    <option value="SANT FELIU LL">SANT FELIU LL</option>
+                    <option value="SANT JOAN DESPI">SANT JOAN DESPI</option>
+                    <option value="SANT JUST DESVERN">SANT JUST DESVERN</option>
+                    <option value="STA.COLOMA CERVELLO">
+                      STA.COLOMA CERVELLO
+                    </option>
+                    <option value="STA.COLOMA GRAMENET">
+                      STA.COLOMA GRAMENET
+                    </option>
+                    <option value="TORRELLES LLOBREGAT">
+                      TORRELLES LLOBREGAT
+                    </option>
+                    <option value="VILADECANS">VILADECANS</option>
                   </select>
                 </div>
               </div>
@@ -247,7 +261,13 @@
                     <h3 class="section-title--two left-style mb-30">Submit:</h3>
                   </div>
                   <div>
-                    <button type="button" class="btn btn-primary">Start</button>
+                    <button
+                      id="prediction-submit"
+                      class="btn btn-primary"
+                      type="submit"
+                    >
+                      Start
+                    </button>
                   </div>
                 </div>
               </div>
@@ -278,7 +298,42 @@
                 <img
                   src="../static/update/grafic_2_1.jpg"
                   class="img-fluid"
+                  id="prediction-image"
                   alt="Donation Image"
+                  onerror="this.src='../static/logo/about-us-pp.jfi'"
+                />
+              </div>
+            </div>
+          </div>
+          <!--=========== Video Area End ==========-->
+        </div>
+      </div>
+      <!--=========== Video Area End ==========-->
+
+      <!--=========== Video Area Start ==========-->
+      <div class="about-video-area section-space--pb_120">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title-wrap text-center section-space--mb_40">
+                <h3 class="section-title--two center-style mb-30">
+                  Model prediction
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--=========== Video Area Start ==========-->
+        <div class="about-video-area">
+          <div class="container">
+            <div class="col-lg-12">
+              <div class="donation-image">
+                <img
+                  src="../static/update/grafic_2_1.jpg"
+                  class="img-fluid"
+                  id="analisi-image"
+                  alt="Donation Image"
+                  onerror="this.src='../static/logo/about-us-pp.jfi'"
                 />
               </div>
             </div>
