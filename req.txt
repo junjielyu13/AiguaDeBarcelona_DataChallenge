@@ -5,3 +5,6 @@ dash
 pandas
 json
 glob
+torch
+neuralprophet
+kaleido

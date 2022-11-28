@@ -969,6 +969,7 @@ input[type="checkbox"] {
   position: relative;
   display: inline-block;
 }
+
 .section-title--two::after {
   position: absolute;
   bottom: 0;
