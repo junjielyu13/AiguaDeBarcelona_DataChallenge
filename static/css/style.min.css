@@ -3796,6 +3796,15 @@ input[type="checkbox"] {
 .single-by-ticket-btn:hover {
   background: #e5dede;
 }
+
+.radio-selector {
+  font-size: 16px;
+}
+
+.center {
+  text-align: center;
+}
+
 .single-feature-wrap {
   margin-top: 30px;
 }
