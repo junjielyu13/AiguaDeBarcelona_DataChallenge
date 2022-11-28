@@ -95,8 +95,8 @@ function prediction(theform) {
     analisi_image = path + "/analisi.png";
     prediction_image = path + "/prediction.png";
   } else {
-    analisi_image = "../static/update/grafic_2_1.jpg";
-    prediction_image = "../static/update/grafic_2_1.jpg";
+    analisi_image = "../static/update/analisi.png";
+    prediction_image = "../static/update/prediction.png";
   }
 
   prediction_box = document.querySelector("#prediction-image");
