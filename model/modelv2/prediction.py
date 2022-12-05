@@ -226,11 +226,13 @@ def ARnet(data_location,
     return m, pred_train, pred_next, final, fig_param, metrics  #pred_train -> train + test
 
 
-data_location = [
-    "./model/modelv2/sum_mensual_comercial.xlsx"
-    "./model/modelv2/data/DOMESTICO_NORM_resum.xlsx",
-    "./model/modelv2/data/INDUS_NORM_resum.xlsx"
-    "./model/modelv2/sum_diario_comercial.xlsx"
+data_set = [
+    "./model/modelv2/data/sum_diario_comercial.xlsx",
+    "./model/modelv2/data/sum_diario_domestic.xlsx",
+    "./model/modelv2/data/sum_diario_industrial.xlsx",
+    "./model/modelv2/data/sum_mensual_comercial.xlsx",
+    "./model/modelv2/data/sum_mensual_domestic.xlsx",
+    "./model/modelv2/data/sum_mensual_industrial.xlsx"
 ]
 
 zonas = [
@@ -247,13 +249,19 @@ if __name__ == "__main__":
     print("prediction model:\n")
 
     ###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
-    data_location = "./model/modelv2/data/sum_mensual_comercial.xlsx"
-    model = ARnet(data_location,
-                  "BARCELONA",
-                  save_prediction=True,
-                  save_img=True,
-                  save_model=True,
-                  show=False)
+
+    for data in data_set:
+        print(data)
+        original = pd.read_excel(data)
+        for zona in zonas:
+            print(zona)
+            if zona in original.columns:
+                model = ARnet(data,
+                              zona,
+                              save_prediction=True,
+                              save_img=True,
+                              save_model=True,
+                              show=False)
 
     ###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
     # data_location = "./model/modelv2/data/sum_diario_comercial.xlsx"
