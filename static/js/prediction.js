@@ -204,18 +204,18 @@ function prediction(theform) {
   );
 
   if (types == "diario") {
-    prediction_comercial_title.innerText =
-      "Predicción del consumo diario de comercial";
-    prediction_domestic_title.innerText =
-      "Predicción del consumo diario de domestic";
-    prediction_industrial_title.innerText =
-      "Predicción del consumo diario de industria";
-    analisi_comercial_title.innerText =
-      "Analisi de la tendencia del consumo diario de comercial";
-    analisi_domestic_title.innerText =
-      "Analisi de la tendencia del consumo diario de domestico";
-    analisi_industrial_title.innerText =
-      "Analisi de la tendencia del consumo diario de industria";
+    prediction_comercial_title.innerHTML =
+      "Predicción del consumo diario comercial";
+    prediction_domestic_title.innerHTML =
+      "Predicción del consumo diario domestic";
+    prediction_industrial_title.innerHTML =
+      "Predicción del consumo diario industrial";
+    analisi_comercial_title.innerHTML =
+      "Analisi de la tendencia del consumo diario comercial";
+    analisi_domestic_title.innerHTML =
+      "Analisi de la tendencia del consumo diario domestico";
+    analisi_industrial_title.innerHTML =
+      "Analisi de la tendencia del consumo diario industria";
 
     if (sum_diario_comercial.includes(zona)) {
       prediction_image_comercial.src =
@@ -246,18 +246,18 @@ function prediction(theform) {
       analisi_image_industrial.src = "../static/update/analisi.png";
     }
   } else if (types == "mensual") {
-    prediction_comercial_title.innerText =
-      "Predicción del consumo mensual de comercial";
-    prediction_domestic_title.innerText =
-      "Predicción del consumo mensual de domestic";
-    prediction_industrial_title.innerText =
-      "Predicción del consumo mensual de industria";
-    analisi_comercial_title.innerText =
-      "Analisi de la tendencia del consumo mensual de comercial";
-    analisi_domestic_title.innerText =
-      "Analisi de la tendencia del consumo mensual de domestico";
-    analisi_industrial_title.innerText =
-      "Analisi de la tendencia del consumo mensual de industria";
+    prediction_comercial_title.innerHTML =
+      "Predicción del consumo mensual comercial";
+    prediction_domestic_title.innerHTML =
+      "Predicción del consumo mensual domestic";
+    prediction_industrial_title.innerHTML =
+      "Predicción del consumo mensual industrial";
+    analisi_comercial_title.innerHTML =
+      "Analisi de la tendencia del consumo mensual comercial";
+    analisi_domestic_title.innerHTML =
+      "Analisi de la tendencia del consumo mensual domestico";
+    analisi_industrial_title.innerHTML =
+      "Analisi de la tendencia del consumo mensual industria";
 
     if (sum_diario_comercial.includes(zona)) {
       prediction_image_comercial.src =
