@@ -253,38 +253,38 @@ zonas = [
 if __name__ == "__main__":
     print("prediction model:\n")
 
-    data_location = "./model/modelv2/data/sum_diario_comercial.xlsx"
-    model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
-        data_location,
-        "BARCELONA",
-        save_prediction=True,
-        save_img=True,
-        save_model=True,
-        para_show=True,
-        pred_show=True)
+    # data_location = "./model/modelv2/data/sum_diario_comercial.xlsx"
+    # model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
+    #     data_location,
+    #     "BARCELONA",
+    #     save_prediction=True,
+    #     save_img=True,
+    #     save_model=True,
+    #     para_show=True,
+    #     pred_show=True)
 
-    data_location = "./model/modelv2/data/sum_mensual_industrial.xlsx"
-    model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
-        data_location,
-        "BARCELONA",
-        save_prediction=True,
-        save_img=True,
-        save_model=True,
-        para_show=True,
-        pred_show=True)
+    # data_location = "./model/modelv2/data/sum_mensual_industrial.xlsx"
+    # model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
+    #     data_location,
+    #     "BARCELONA",
+    #     save_prediction=True,
+    #     save_img=True,
+    #     save_model=True,
+    #     para_show=True,
+    #     pred_show=True)
     # model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"BADALONA",show =True)
     # model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"GAVA",show = True)
 
-    # for data in data_set:
-    #     print(data)
-    #     original = pd.read_excel(data)
-    #     for zona in zonas:
-    #         print(zona)
-    #         if zona in original.columns:
-    #             model = NProphet(data,
-    #                              zona,
-    #                              save_prediction=True,
-    #                              save_img=True,
-    #                              save_model=True,
-    #                              pred_show=False,
-    #                              para_show=False)
+    for data in data_set:
+        print(data)
+        original = pd.read_excel(data)
+        for zona in zonas:
+            print(zona)
+            if zona in original.columns:
+                model = NProphet(data,
+                                 zona,
+                                 save_prediction=True,
+                                 save_img=True,
+                                 save_model=True,
+                                 pred_show=False,
+                                 para_show=False)
