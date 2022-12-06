@@ -53,6 +53,18 @@
         height: 100%;
         object-fit: cover;
       }
+
+      .analisi_image {
+        padding-left: 200px;
+        padding-right: 200px;
+      }
+
+      @media screen and (max-width: 1000px) {
+        .analisi_image {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
     </style>
   </head>
 
@@ -173,11 +185,13 @@
               <div class="mission-wrap mr-lg-5">
                 <div class="section-title-wrap text-left">
                   <h4 class="section-title-normal mb-30">
-                    <strong> Predicción del modelo </strong>
+                    <strong style="font-size: 36px">
+                      Predicción del modelo
+                    </strong>
                   </h4>
                 </div>
 
-                <div class="target-content">
+                <div class="target-content" style="font-size: 20px">
                   <p>
                     Use el modelo de
                     <strong> Inteligencia Artificial </strong>
@@ -192,7 +206,7 @@
         </div>
       </div>
 
-      <div class="church-about-area section-space--ptb_20">
+      <div class="church-about-area">
         <div class="container">
           <form action="javascript:" onsubmit="return prediction(this)">
             <div class="row align-items-start">
@@ -335,10 +349,7 @@
 
                 <div class="container">
                   <div class="col-lg-12">
-                    <div
-                      class="donation-image center"
-                      style="padding-left: 160px; padding-right: 160px"
-                    >
+                    <div class="donation-image center analisi_image">
                       <img
                         src="../model/modelv2/images/diario/BADALONA/param_comercial_BADALONA.jpeg"
                         class="img-fluid"
@@ -428,10 +439,7 @@
 
                 <div class="container">
                   <div class="col-lg-12">
-                    <div
-                      class="donation-image center"
-                      style="padding-left: 160px; padding-right: 160px"
-                    >
+                    <div class="donation-image center analisi_image">
                       <img
                         src="../model/modelv2/images/diario/BADALONA/param_domestic_BADALONA.jpeg"
                         class="img-fluid"
@@ -518,10 +526,7 @@
 
                 <div class="container">
                   <div class="col-lg-12">
-                    <div
-                      class="donation-image center"
-                      style="padding-left: 160px; padding-right: 160px"
-                    >
+                    <div class="donation-image center analisi_image">
                       <img
                         src="../model/modelv2/images/diario/BADALONA/param_industrial_BADALONA.jpeg"
                         class="img-fluid"
@@ -582,6 +587,8 @@
           </div>
 
           <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
       </div>
       <!--=========== Video Area End ==========-->
@@ -707,6 +714,10 @@
 
     <script>
       var swiper = new Swiper(".mySwiper", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
         pagination: {
           el: ".swiper-pagination",
         },
