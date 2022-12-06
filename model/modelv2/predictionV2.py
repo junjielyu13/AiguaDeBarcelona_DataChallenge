@@ -20,12 +20,7 @@ def NProphet(data_location,
     consumo = data_location.split("\\")[-1][:-3]
     mensual = consumo.split("_")[1] == "mensual"
     actividad = consumo.split("_")[2][:-2]
-    print(actividad)
-    print(mensual)
-    print(consumo)
-    # def get_var_name(variable):
-    #     globals_dict = globals()
-    #     return [var_name for var_name in globals_dict if globals_dict[var_name] is variable]
+
     if mensual == True:
         df = pd.DataFrame({"ds": section1.iloc[:, 1], "y": section1[section2]})
         m = NeuralProphet(loss_func=torch.nn.L1Loss)
@@ -34,20 +29,20 @@ def NProphet(data_location,
     else:
         df = pd.DataFrame({"ds": section1["FECHA"], "y": section1[section2]})
         m = NeuralProphet(loss_func=torch.nn.L1Loss)
-        print("--------------------------------")
         df_train, df_test = m.split_df(df, freq="D", valid_p=0.03)
         metrics = m.fit(df_train, freq="D", validation_df=df_test)
+
     cost = metrics.loc[metrics.shape[0] - 1, "RMSE"]
     pred_train = m.predict(df)
     next_dataset = m.make_future_dataframe(df_test, periods=period)
     pred_next = m.predict(df=next_dataset)
-
     df = pd.concat([pred_train, pred_next])
 
     if save_prediction == True:
-        df.to_csv(
-            rf"C:\Users\23675\OneDrive\桌面\ABChallenge\Neuralprophet result\result_{consumo}_{section2}.csv"
-        )
+        path = "./model/modelv3/prediction/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        df.to_csv(path + f"result_{actividad}_{section2}.csv")
 
     if mensual == True:
         final = go.Figure()
@@ -62,10 +57,38 @@ def NProphet(data_location,
             'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
+            'yanchor': 'top',
+            'font': {
+                'size': 30
+            },
         },
-                            xaxis_title="Meses",
-                            yaxis_title="Consumo(Litro/Mes)")
+                            legend={
+                                "font": {
+                                    "size": 18
+                                },
+                            },
+                            xaxis={
+                                "tickfont": {
+                                    "size": 22
+                                },
+                                "title": {
+                                    "text": "Meses",
+                                    "font": {
+                                        "size": 24
+                                    },
+                                },
+                            },
+                            yaxis={
+                                "tickfont": {
+                                    "size": 22
+                                },
+                                "title": {
+                                    "text": "Consumo(Litro/Día)",
+                                    "font": {
+                                        "size": 24
+                                    },
+                                },
+                            })
         final.add_trace(
             go.Scatter(x=df['ds'][35:35 + period + 1],
                        y=df['yhat1'][35:35 + period + 1],
@@ -77,16 +100,21 @@ def NProphet(data_location,
                        mode='markers',
                        name='Actual',
                        line_color="firebrick"))
+
         fig_param = m.plot_parameters(plotting_backend="plotly")
         fig_param.update_layout(
             title={
                 'text':
                 f"Análisis de la tendencia del consumo {actividad} en {section2}",
-                'y': 1,
+                'y': 0.99,
                 'x': 0.5,
                 'xanchor': 'center',
-                'yanchor': 'top'
+                'yanchor': 'top',
+                'font': {
+                    'size': 16
+                },
             })
+
     else:
         final = go.Figure()
         final.add_trace(
@@ -100,10 +128,38 @@ def NProphet(data_location,
             'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
-            'yanchor': 'top'
+            'yanchor': 'top',
+            'font': {
+                'size': 30
+            },
         },
-                            xaxis_title="Meses",
-                            yaxis_title="Consumo(Litro/Día)")
+                            legend={
+                                "font": {
+                                    "size": 18
+                                },
+                            },
+                            xaxis={
+                                "tickfont": {
+                                    "size": 22
+                                },
+                                "title": {
+                                    "text": "Meses",
+                                    "font": {
+                                        "size": 24
+                                    },
+                                },
+                            },
+                            yaxis={
+                                "tickfont": {
+                                    "size": 22
+                                },
+                                "title": {
+                                    "text": "Consumo(Litro/Día)",
+                                    "font": {
+                                        "size": 24
+                                    },
+                                },
+                            })
 
         final.add_trace(
             go.Scatter(x=df['ds'][1078:1078 + period + 1],
@@ -121,50 +177,114 @@ def NProphet(data_location,
             title={
                 'text':
                 f"Análisis de la tendencia del consumo {actividad} en {section2}",
-                'y': 1,
+                'y': 0.99,
                 'x': 0.5,
                 'xanchor': 'center',
-                'yanchor': 'top'
+                'yanchor': 'top',
+                'font': {
+                    'size': 16
+                },
             })
+
     final.add_annotation(text=f"RMSE: {round(cost,2)}",
                          xref="paper",
                          yref="paper",
                          x=0.9,
                          y=0.1)
+
     if save_model == True:
-        torch.save(
-            m.model.state_dict(),
-            rf"C:\Users\23675\OneDrive\桌面\ABChallenge\Neuralprophet result\model_{consumo}_{section2}.pth"
-        )
+        path = "./model/modelv3/save_model/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        torch.save(m.model.state_dict(),
+                   path + f"model_{actividad}_{section2}.pth")
+
     if save_img == True:
-        final.write_image(
-            rf"C:\Users\23675\OneDrive\桌面\ABChallenge\Neuralprophet result\result_{consumo}_{section2}.jpeg"
-        )
+        path = "./model/modelv3/images/"
+        if mensual == True:
+            path += "mensual/" + section2 + "/"
+        else:
+            path += "diario/" + section2 + "/"
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        fig_param.write_image(path + f"param_{actividad}_{section2}.jpeg")
+        final.write_image(path + f"prediction_{actividad}_{section2}.jpeg",
+                          width=1980,
+                          height=1080)
+
     if para_show == True:
         fig_param.show()
     if pred_show == True:
         final.show()
     #1
     if save_model == True:
-        torch.save(
-            m.model.state_dict(),
-            rf"C:\Users\23675\OneDrive\桌面\ABChallenge\Neuralprophet result\model_{consumo}_{section2}.pth"
-        )  #####Saves the model's weights and state in the file model.pth, which allows the continuous update once it is deployed on the website.
+
+        path = "./model/modelv3/save_model/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        torch.save(m.model.state_dict(),
+                   path + f"model_{actividad}_{section2}.pth")
     return m, pred_train, pred_next, final, fig_param, metrics  #pred_train -> train + test
 
 
-###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
-###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
+data_set = [
+    "./model/modelv2/data/sum_diario_comercial.xlsx",
+    "./model/modelv2/data/sum_diario_domestic.xlsx",
+    "./model/modelv2/data/sum_diario_industrial.xlsx",
+    "./model/modelv2/data/sum_mensual_comercial.xlsx",
+    "./model/modelv2/data/sum_mensual_domestic.xlsx",
+    "./model/modelv2/data/sum_mensual_industrial.xlsx"
+]
+
+zonas = [
+    "BADALONA", "BARCELONA", "BEGUES", "CASTELLDEFELS", "CERDANYOLA",
+    "CORNELLA", "EL PAPIOL", "ESPLUGUES", "GAVA", "L'HOSPITALET LLOBR.",
+    "LA LLAGOSTA", "LES BOTIGUES SITGES", "MONTCADA I REIXAC", "MONTGAT",
+    "PALLEJA", "SANT ADRIA", "SANT BOI", "SANT CLIMENT LLOB.", "SANT CUGAT",
+    "SANT FELIU LL.", "SANT JOAN DESPI", "SANT JUST DESVERN",
+    "STA.COLOMA CERVELLO", "STA.COLOMA GRAMENET", "TORRELLES LLOBREGAT",
+    "VILADECANS"
+]
 
 if __name__ == "__main__":
     print("prediction model:\n")
 
     data_location = "./model/modelv2/data/sum_diario_comercial.xlsx"
     model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
-        data_location, "BARCELONA", para_show=True, pred_show=True)
+        data_location,
+        "BARCELONA",
+        save_prediction=True,
+        save_img=True,
+        save_model=True,
+        para_show=True,
+        pred_show=True)
 
     data_location = "./model/modelv2/data/sum_mensual_industrial.xlsx"
     model, pred_train, pred_next, fig_final, fig_param, metrics = NProphet(
-        data_location, "BARCELONA", para_show=True, pred_show=True)
-# model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"BADALONA",show =True)
-# model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"GAVA",show = True)
+        data_location,
+        "BARCELONA",
+        save_prediction=True,
+        save_img=True,
+        save_model=True,
+        para_show=True,
+        pred_show=True)
+    # model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"BADALONA",show =True)
+    # model,pred_train,pred_next,fig_final,fig_param = ARnet_dia(data_location,"GAVA",show = True)
+
+    # for data in data_set:
+    #     print(data)
+    #     original = pd.read_excel(data)
+    #     for zona in zonas:
+    #         print(zona)
+    #         if zona in original.columns:
+    #             model = NProphet(data,
+    #                              zona,
+    #                              save_prediction=True,
+    #                              save_img=True,
+    #                              save_model=True,
+    #                              pred_show=False,
+    #                              para_show=False)
