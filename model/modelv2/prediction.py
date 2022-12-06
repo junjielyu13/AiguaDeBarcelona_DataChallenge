@@ -245,23 +245,23 @@ zonas = [
     "VILADECANS"
 ]
 
-if __name__ == "__main__":
-    print("prediction model:\n")
+# if __name__ == "__main__":
+#     print("prediction model:\n")
 
-    ###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
+###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
 
-    for data in data_set:
-        print(data)
-        original = pd.read_excel(data)
-        for zona in zonas:
-            print(zona)
-            if zona in original.columns:
-                model = ARnet(data,
-                              zona,
-                              save_prediction=True,
-                              save_img=True,
-                              save_model=True,
-                              show=False)
+for data in data_set:
+    print(data)
+    original = pd.read_excel(data)
+    for zona in zonas:
+        print(zona)
+        if zona in original.columns:
+            model = ARnet(data,
+                          zona,
+                          save_prediction=True,
+                          save_img=True,
+                          save_model=True,
+                          show=False)
 
     ###Noted that the last available data month(2021 December) is not complete, which shows a significant decay in the representation.
     # data_location = "./model/modelv2/data/sum_diario_comercial.xlsx"
