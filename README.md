@@ -1,16 +1,29 @@
 # <div align=center> AiguaDeBarcelona_DataChallenge </div>
 
 <div align=center>
-    <img src="./static/logo/aigua_logo.png" width=30% />
+    <img src="./demo/logo.png" width=30% />
 </div>
 
 ## About the project
 
-It is an analysis of water consumption measured by meters with the factors: industry, domestic and tourism according to the geographical region during 2019 - 2021
+It is an analysis of water consumption measured by meters with the factors: industry, domestic and tourism according to the geographical region during 2019 - 2021:
 
-## Screenshots:
+> https://junjielyu13.github.io/AiguaDeBarcelona_DataChallenge
+## Preview:
 
-TODO
+### Cover:
+
+![image](./demo/cover1.png)
+![image](./demo/cover2.png)
+
+### Data analysis
+
+![image](./demo/grafic1.png)
+
+### Artificial Intelligence Model
+
+![image](./demo/model.png)
+![image](./demo/model2.png)
 
 ## Contributors
 
