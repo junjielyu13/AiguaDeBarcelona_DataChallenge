@@ -321,11 +321,11 @@ function prediction(theform) {
     }
   } else if (types == "error") {
     prediction_comercial_title.innerHTML =
-      "Detecció de errores del consumo diario comercial";
+      "Detección de errores del consumo diario comercial";
     prediction_domestic_title.innerHTML =
-      "Detecció de errores del consumo diario domestic";
+      "Detección de errores del consumo diario domestic";
     prediction_industrial_title.innerHTML =
-      "Detecció de errores del consumo diario industrial";
+      "Detección de errores del consumo diario industrial";
 
     error_1.style.display = "none";
     error_2.style.display = "none";
