@@ -447,9 +447,7 @@ zonas = [
 ]
 
 for data in data_set:
-    print(data)
     original = pd.read_excel(data)
     for zona in zonas:
-        print(zona)
         if zona in original.columns:
             model = NProphet(data, zona)
