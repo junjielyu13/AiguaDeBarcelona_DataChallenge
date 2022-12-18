@@ -8,3 +8,4 @@ glob
 torch
 neuralprophet
 kaleido
+sklearn

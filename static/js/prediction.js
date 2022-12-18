@@ -165,7 +165,12 @@ function prediction(theform) {
   types = theform.flexRadioDefault["value"];
   zona = theform.zonaSelector["value"];
 
-  path = "../model/modelv2/images/" + types + "/" + zona + "/";
+  // path = "../model/modelv4/images/" + types + "/" + zona + "/";
+  if (types == "mensual") {
+    path = "../model/modelv4/images/mensual";
+  } else {
+    path = "../model/modelv4/images/error";
+  }
 
   // images:
   prediction_image_comercial = document.querySelector(
@@ -203,7 +208,30 @@ function prediction(theform) {
     "#prediction-industiral-title"
   );
 
+  analisi_title_area_comercial = document.querySelector("#analisi-title-area");
+  analisi_image_area_comercial = document.querySelector("#analisi-image-area");
+  analisi_title_area_domestico = document.querySelector(
+    "#analisi-title-domestico"
+  );
+  analisi_image_area_domestico = document.querySelector(
+    "#analisi-image-domestico"
+  );
+  analisi_title_area_industrial = document.querySelector(
+    "#analisi-title-industrial"
+  );
+  analisi_image_area_industrial = document.querySelector(
+    "#analisi-image-industrial"
+  );
+
+  error_1 = document.querySelector("#error-1");
+  error_2 = document.querySelector("#error-2");
+  error_3 = document.querySelector("#error-3");
+
   if (types == "diario") {
+    error_1.style.display = "block";
+    error_2.style.display = "block";
+    error_3.style.display = "block";
+
     prediction_comercial_title.innerHTML =
       "Predicción del consumo diario comercial";
     prediction_domestic_title.innerHTML =
@@ -246,6 +274,10 @@ function prediction(theform) {
       analisi_image_industrial.src = "../static/update/analisi.png";
     }
   } else if (types == "mensual") {
+    error_1.style.display = "block";
+    error_2.style.display = "block";
+    error_3.style.display = "block";
+
     prediction_comercial_title.innerHTML =
       "Predicción del consumo mensual comercial";
     prediction_domestic_title.innerHTML =
@@ -286,6 +318,38 @@ function prediction(theform) {
     } else {
       prediction_image_industrial.src = "../static/update/prediction.png";
       analisi_image_industrial.src = "../static/update/analisi.png";
+    }
+  } else if (types == "error") {
+    prediction_comercial_title.innerHTML =
+      "Detecció de errores del consumo diario comercial";
+    prediction_domestic_title.innerHTML =
+      "Detecció de errores del consumo diario domestic";
+    prediction_industrial_title.innerHTML =
+      "Detecció de errores del consumo diario industrial";
+
+    error_1.style.display = "none";
+    error_2.style.display = "none";
+    error_3.style.display = "none";
+
+    if (sum_diario_comercial.includes(zona)) {
+      prediction_image_comercial.src =
+        path + "/error_comercial_" + zona + ".jpeg";
+    } else {
+      prediction_image_comercial.src = "../static/update/prediction.png";
+    }
+
+    if (sum_diario_domestic.includes(zona)) {
+      prediction_image_domestic.src =
+        path + "/error_domestic_" + zona + ".jpeg";
+    } else {
+      prediction_image_domestic.src = "../static/update/prediction.png";
+    }
+
+    if (sum_diario_industrial.includes(zona)) {
+      prediction_image_industrial.src =
+        path + "/error_industrial_" + zona + ".jpeg";
+    } else {
+      prediction_image_industrial.src = "../static/update/prediction.png";
     }
   } else {
     prediction_image_comercial.src = "../static/update/prediction.png";
