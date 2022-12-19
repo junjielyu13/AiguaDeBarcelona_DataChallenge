@@ -250,7 +250,7 @@ def NProphet(data_location,
                        line_color="firebrick"))
         detect.update_layout(title={
             "text":
-            f"Detección de errores {actividad} en {section2} últimos 3 meses",
+            f"Detección de errores {actividad} en {section2}",
             'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
@@ -348,35 +348,35 @@ def NProphet(data_location,
     pred_train.to_csv(r"./df_final.csv")
 
     # Saves
-    if save_prediction == True:
-        path = "./model/modelv4/prediction/"
+    # if save_prediction == True:
+    #     path = "./model/modelv4/prediction/"
 
-        if mensual:
-            path += "mensual/"
-        elif anomaly_detect == True:
-            path += "error/"
-        else:
-            path += "diario/"
+    #     if mensual:
+    #         path += "mensual/"
+    #     elif anomaly_detect == True:
+    #         path += "error/"
+    #     else:
+    #         path += "diario/"
 
-        if not os.path.exists(path):
-            os.makedirs(path)
-        df.to_csv(path + f"result_{actividad}_{section2}.csv")
+    #     if not os.path.exists(path):
+    #         os.makedirs(path)
+    #     df.to_csv(path + f"result_{actividad}_{section2}.csv")
 
-    if save_model == True:
-        path = "./model/modelv4/save_model/"
+    # if save_model == True:
+    #     path = "./model/modelv4/save_model/"
 
-        if mensual == True:
-            path += "mensual/"
-        elif anomaly_detect == True:
-            path += "error/"
-        else:
-            path += "diario/"
+    #     if mensual == True:
+    #         path += "mensual/"
+    #     elif anomaly_detect == True:
+    #         path += "error/"
+    #     else:
+    #         path += "diario/"
 
-        if not os.path.exists(path):
-            os.makedirs(path)
+    #     if not os.path.exists(path):
+    #         os.makedirs(path)
 
-        torch.save(m.model.state_dict(),
-                   path + f"model_{actividad}_{section2}.pth")
+    #     torch.save(m.model.state_dict(),
+    #                path + f"model_{actividad}_{section2}.pth")
 
     if save_img == True:
 
@@ -392,10 +392,10 @@ def NProphet(data_location,
         if not os.path.exists(path):
             os.makedirs(path)
 
-        fig_param.write_image(path + f"param_{actividad}_{section2}.jpeg")
-        final.write_image(path + f"prediction_{actividad}_{section2}.jpeg",
-                          width=1980,
-                          height=1080)
+        # fig_param.write_image(path + f"param_{actividad}_{section2}.jpeg")
+        # final.write_image(path + f"prediction_{actividad}_{section2}.jpeg",
+        #                   width=1980,
+        #                   height=1080)
         if anomaly_detect:
             detect.write_image(path + f"error_{actividad}_{section2}.jpeg",
                                width=1980,
@@ -431,9 +431,9 @@ data_set = [
     "./model/modelv2/data/sum_diario_comercial.xlsx",
     "./model/modelv2/data/sum_diario_domestic.xlsx",
     "./model/modelv2/data/sum_diario_industrial.xlsx",
-    "./model/modelv2/data/sum_mensual_comercial.xlsx",
-    "./model/modelv2/data/sum_mensual_domestic.xlsx",
-    "./model/modelv2/data/sum_mensual_industrial.xlsx"
+    # "./model/modelv2/data/sum_mensual_comercial.xlsx",
+    # "./model/modelv2/data/sum_mensual_domestic.xlsx",
+    # "./model/modelv2/data/sum_mensual_industrial.xlsx"
 ]
 
 zonas = [
