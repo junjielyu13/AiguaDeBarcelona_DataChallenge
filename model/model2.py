@@ -21,7 +21,6 @@ def ARnet(section1, section2, count, save, period=4):
 
             pred_train = m.predict(df)
             pred_test = m.predict(df_test)
-            #prediction over the next period = "default:4" months
             next_dataset = m.make_future_dataframe(df_test, periods=period)
             pred_next = m.predict(df=next_dataset)
 
